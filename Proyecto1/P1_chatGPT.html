@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portafolio digital de proyectos informáticos">
-    <meta property="og:title" content="Portafolio Digital">
-    <meta property="og:description" content="Muestra de proyectos informáticos">
-    <title>Portafolio Digital</title>
+    <meta name="description" content="Portafolio digital moderno y accesible">
+    <meta property="og:title" content="Portafolio Personal">
+    <meta property="og:description" content="Explora mis proyectos y habilidades">
+    <meta property="og:image" content="banner.jpg">
+    <title>Portafolio Personal</title>
     <style>
         :root {
-            --color-primario: #121212;
-            --color-secundario: #1e1e1e;
-            --color-acento: #ff6600;
-            --color-texto: #ffffff;
-            --color-fondo: #2a2a2a;
+            --color-primario: #1a1a1a;
+            --color-secundario: #0077b6;
+            --color-terciario: #90e0ef;
+            --color-fondo: #ffffff;
+            --color-texto: #333333;
         }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-fondo);
+            color: var(--color-texto);
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo);
-            color: var(--color-texto);
         }
         header {
             background: var(--color-primario);
@@ -28,135 +29,129 @@
             text-align: center;
             padding: 1rem;
         }
+        .banner {
+            width: 100%;
+            height: 300px;
+            background: url('banner.jpg') center/cover no-repeat;
+        }
         nav {
             display: flex;
             justify-content: center;
+            gap: 1rem;
             background: var(--color-secundario);
             padding: 1rem;
         }
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
+        }
+        section {
+            padding: 2rem;
+            transition: all 0.5s ease-in-out;
         }
         .proyectos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1rem;
-            padding: 2rem;
         }
         .proyecto {
-            background: var(--color-primario);
+            background: var(--color-terciario);
             padding: 1rem;
-            text-align: center;
-            border-radius: 5px;
+            border-radius: 10px;
         }
-        .proyecto img {
-            width: 100%;
-            cursor: pointer;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal img {
-            width: 80%;
-            max-width: 600px;
-        }
-        .modal .cerrar {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 2rem;
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--color-secundario);
             color: white;
-            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: var(--color-primario);
+        }
+        footer {
+            background: var(--color-primario);
+            color: white;
+            text-align: center;
+            padding: 1rem;
         }
         #cookie-banner {
             position: fixed;
             bottom: 0;
-            width: 100%;
             background: var(--color-secundario);
             color: white;
-            text-align: center;
+            width: 100%;
             padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        #cookie-banner p {
-            margin: 0;
-        }
-        #cookie-banner button {
-            background: var(--color-acento);
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Portafolio Digital</h1>
+        <h1>Mi Portafolio</h1>
     </header>
+    <div class="banner"></div>
     <nav>
         <a href="#inicio">Inicio</a>
         <a href="#proyectos">Proyectos</a>
-        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#sobre-mi">Sobre Mí</a>
         <a href="#contacto">Contacto</a>
     </nav>
+    <section id="inicio">
+        <h2>Bienvenido</h2>
+        <p>Explora mis proyectos y conoce más sobre mi trabajo.</p>
+    </section>
     <section id="proyectos" class="proyectos">
         <article class="proyecto">
-            <img src="foto1.jpg" alt="Proyecto 1" onclick="abrirModal(this)">
-            <h2>Proyecto 1</h2>
+            <img src="foto1.jpg" alt="Proyecto 1" width="100%">
+            <h3>Proyecto 1</h3>
             <p>Descripción breve del proyecto.</p>
+            <a href="#" class="btn">Ver más</a>
         </article>
         <article class="proyecto">
-            <img src="foto1.jpg" alt="Proyecto 2" onclick="abrirModal(this)">
-            <h2>Proyecto 2</h2>
+            <img src="foto2.jpg" alt="Proyecto 2" width="100%">
+            <h3>Proyecto 2</h3>
             <p>Descripción breve del proyecto.</p>
+            <a href="#" class="btn">Ver más</a>
         </article>
         <article class="proyecto">
-            <img src="foto1.jpg" alt="Proyecto 3" onclick="abrirModal(this)">
-            <h2>Proyecto 3</h2>
+            <img src="foto3.jpg" alt="Proyecto 3" width="100%">
+            <h3>Proyecto 3</h3>
             <p>Descripción breve del proyecto.</p>
+            <a href="#" class="btn">Ver más</a>
         </article>
     </section>
-    <div class="modal" id="modal">
-        <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <img id="imagenModal" src="">
-    </div>
-
-    <!-- Aviso de cookies conforme RGPD -->
+    <section id="sobre-mi">
+        <h2>Sobre Mí</h2>
+        <p>Breve descripción sobre mi experiencia y habilidades.</p>
+    </section>
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <form>
+            <label>Nombre: <input type="text" required></label>
+            <label>Email: <input type="email" required></label>
+            <label>Mensaje: <textarea required></textarea></label>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2025 Mi Portafolio | Redes Sociales</p>
+    </footer>
     <div id="cookie-banner">
-        <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario. <a href="#" style="color: var(--color-acento);">Más información</a></p>
-        <button onclick="aceptarCookies()">Aceptar</button>
+        <p>Este sitio usa cookies para mejorar la experiencia.</p>
+        <button onclick="acceptCookies()">Aceptar</button>
+        <button onclick="rejectCookies()">Rechazar</button>
     </div>
-
     <script>
-        function abrirModal(img) {
-            document.getElementById('modal').style.display = 'flex';
-            document.getElementById('imagenModal').src = img.src;
-        }
-        function cerrarModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        function aceptarCookies() {
+        function acceptCookies() {
             document.getElementById('cookie-banner').style.display = 'none';
-            localStorage.setItem('cookiesAceptadas', 'true');
         }
-        
-        window.onload = function() {
-            if (localStorage.getItem('cookiesAceptadas')) {
-                document.getElementById('cookie-banner').style.display = 'none';
-            }
+        function rejectCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
         }
     </script>
 </body>
