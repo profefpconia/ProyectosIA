@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio personal de [Tu Nombre], diseñador web especializado en creaciones modernas y accesibles.">
+    <meta name="author" content="[Tu Nombre]">
+    <meta property="og:title" content="Portafolio Personal">
+    <meta property="og:description" content="Portafolio personal de [Tu Nombre], diseñador web especializado en creaciones modernas y accesibles.">
+    <meta property="og:image" content="banner.jpg">
+    <meta property="og:url" content="[URL de tu portafolio]">
+    <title>Portafolio Personal</title>
+    <style>
+        :root {
+            --color-primario: #1E90FF;
+            --color-secundario: #FFD700;
+            --color-terciario: #FF4500;
+            --color-cuaternario: #32CD32;
+            --color-negro: #000000;
+            --color-fondo: #FFFFFF;
+            --color-texto: #333333;
+            --tipografia-principal: 'Arial, sans-serif';
+        }
+
+        body {
+            font-family: var(--tipografia-principal);
+            color: var(--color-texto);
+            background-color: var(--color-fondo);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--color-primario);
+            color: var(--color-fondo);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--color-secundario);
+        }
+
+        nav a {
+            color: var(--color-negro);
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--color-terciario);
+        }
+
+        .banner {
+            background-image: url('banner.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--color-fondo);
+            text-shadow: 2px 2px var(--color-negro);
+        }
+
+        .banner h1 {
+            margin: 0;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        .proyectos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .proyecto {
+            border: 1px solid var(--color-primario);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .proyecto:hover {
+            transform: scale(1.05);
+        }
+
+        .proyecto img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .proyecto button {
+            background-color: var(--color-primario);
+            color: var(--color-fondo);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .proyecto button:hover {
+            background-color: var(--color-terciario);
+        }
+
+        footer {
+            background-color: var(--color-secundario);
+            color: var(--color-negro);
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        footer a {
+            color: var(--color-negro);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-negro);
+            color: var(--color-fondo);
+            text-align: center;
+            padding: 10px 0;
+            display: none;
+        }
+
+        .cookie-banner button {
+            background-color: var(--color-primario);
+            color: var(--color-fondo);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .cookie-banner button:hover {
+            background-color: var(--color-terciario);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portafolio Personal</h1>
+    </header>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <section class="banner" id="inicio">
+        <h1>Bienvenido a mi Portafolio</h1>
+    </section>
+    <section id="proyectos">
+        <h2>Proyectos</h2>
+        <div class="proyectos">
+            <article class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 1">
+                <h3>Proyecto 1</h3>
+                <p>Descripción breve del proyecto 1.</p>
+                <button onclick="verMas('proyecto1')">Ver más</button>
+            </article>
+            <article class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 2">
+                <h3>Proyecto 2</h3>
+                <p>Descripción breve del proyecto 2.</p>
+                <button onclick="verMas('proyecto2')">Ver más</button>
+            </article>
+            <article class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 3">
+                <h3>Proyecto 3</h3>
+                <p>Descripción breve del proyecto 3.</p>
+                <button onclick="verMas('proyecto3')">Ver más</button>
+            </article>
+        </div>
+    </section>
+    <section id="sobre-mi">
+        <h2>Sobre mí</h2>
+        <p>Soy un diseñador web especializado en creaciones modernas y accesibles. Me apasiona el diseño y la tecnología.</p>
+    </section>
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <form id="formulario-contacto">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+    <footer>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+        <a href="#">RSS</a>
+        <a href="mailto:tuemail@example.com">Email</a>
+    </footer>
+    <div class="cookie-banner" id="cookie-banner">
+        <p>Este sitio web utiliza cookies. <a href="#" id="politica-privacidad">Política de privacidad</a></p>
+        <button id="aceptar-cookies">Aceptar</button>
+        <button id="rechazar-cookies">Rechazar</button>
+    </div>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('cookie-banner').style.display = 'block';
+
+            document.getElementById('aceptar-cookies').addEventListener('click', function() {
+                document.getElementById('cookie-banner').style.display = 'none';
+                // Aquí puedes agregar el código para aceptar cookies
+            });
+
+            document.getElementById('rechazar-cookies').addEventListener('click', function() {
+                document.getElementById('cookie-banner').style.display = 'none';
+                // Aquí puedes agregar el código para rechazar cookies
+            });
+
+            document.getElementById('formulario-contacto').addEventListener('submit', function(event) {
+                event.preventDefault();
+                alert('Formulario enviado con éxito');
+                // Aquí puedes agregar el código para enviar el formulario
+            });
+        });
+
+        function verMas(proyecto) {
+            alert('Redirigiendo a más información sobre el ' + proyecto);
+            // Aquí puedes agregar el código para redirigir a la página del proyecto
+        }
+    </script>
+</body>
+</html>
