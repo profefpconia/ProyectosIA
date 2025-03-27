@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio personal de [Tu Nombre] - Desarrollador Web">
+    <meta name="keywords" content="portafolio, desarrollador web, diseño web, proyectos web">
+    <meta name="author" content="[Tu Nombre]">
+    <meta property="og:title" content="Portafolio de [Tu Nombre]">
+    <meta property="og:description" content="Portafolio personal de [Tu Nombre] - Desarrollador Web">
+    <meta property="og:image" content="URL de la imagen del banner">
+    <meta property="og:url" content="URL de tu portafolio">
+    <link rel="canonical" href="URL de tu portafolio">
+    <link rel="alternate" hreflang="es" href="URL de tu portafolio">
+    <title>Portafolio de [Tu Nombre]</title>
+    <style>
+        /* Estilos CSS */
+        :root {
+            --color-primary: #007bff;
+            --color-secondary: #6c757d;
+            --color-accent: #28a745;
+            --color-background: #f8f9fa;
+            --color-text: #343a40;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif; /* Fuente moderna */
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            color: var(--color-text);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        /* Navegación */
+        nav {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.5rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Banner */
+        #banner {
+            background-image: url('banner.jpg'); /* Reemplazar con la URL de tu imagen */
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        #banner h2 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Secciones */
+        section {
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        section.show {
+            opacity: 1;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Proyectos */
+        #proyectos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .proyecto {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .proyecto img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .proyecto h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .proyecto p {
+            margin-bottom: 1rem;
+        }
+
+        .proyecto a {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .proyecto a:hover {
+            background-color: var(--color-accent);
+        }
+
+        /* Sobre mí */
+        #sobre-mi p {
+            text-align: justify;
+        }
+
+        /* Contacto */
+        #contacto form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #contacto label {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        #contacto input,
+        #contacto textarea {
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #contacto button {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #contacto button:hover {
+            background-color: var(--color-accent);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-secondary);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Cookie Consent */
+        #cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+            display: none; /* Oculto por defecto */
+        }
+
+        #cookie-consent button {
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0.5rem 0;
+            }
+
+            #banner h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animaciones */
+        .proyecto a:hover,
+        #contacto button:hover {
+          background-color: var(--color-accent);
+          transform: scale(1.05); /* Ligeramente más grande */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>[Tu Nombre]</h1>
+        <p>Desarrollador Web</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="banner">
+        <h2>Bienvenido a mi Portafolio</h2>
+    </section>
+
+    <section id="inicio" class="show">
+        <h2>Inicio</h2>
+        <p>¡Hola! Soy [Tu Nombre], un desarrollador web apasionado por crear experiencias web increíbles. Este es mi portafolio donde comparto mis proyectos y habilidades.</p>
+    </section>
+
+    <section id="proyectos">
+        <h2>Proyectos</h2>
+        <div id="proyectos">
+            <div class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 1">
+                <h3>Proyecto 1</h3>
+                <p>Descripción breve del Proyecto 1.</p>
+                <a href="#">Ver más</a>
+            </div>
+            <div class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 2">
+                <h3>Proyecto 2</h3>
+                <p>Descripción breve del Proyecto 2.</p>
+                <a href="#">Ver más</a>
+            </div>
+            <div class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 3">
+                <h3>Proyecto 3</h3>
+                <p>Descripción breve del Proyecto 3.</p>
+                <a href="#">Ver más</a>
+            </div>
+            <div class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 4">
+                <h3>Proyecto 4</h3>
+                <p>Descripción breve del Proyecto 4.</p>
+                <a href="#">Ver más</a>
+            </div>
+            <div class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 5">
+                <h3>Proyecto 5</h3>
+                <p>Descripción breve del Proyecto 5.</p>
+                <a href="#">Ver más</a>
+            </div>
+            <div class="proyecto">
+                <img src="foto1.jpg" alt="Proyecto 6">
+                <h3>Proyecto 6</h3>
+                <p>Descripción breve del Proyecto 6.</p>
+                <a href="#">Ver más</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre-mi">
+        <h2>Sobre mí</h2>
+        <p>Aquí puedes escribir una descripción detallada sobre ti, tus habilidades, tu experiencia y tus pasiones.  Puedes incluir información sobre tu formación, tus proyectos personales y profesionales, y tus objetivos a futuro.</p>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="5"></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2024 [Tu Nombre] | <a href="#">Redes Sociales</a> | <a href="#">RSS</a> | <a href="mailto:tu@email.com">Email</a> | <a href="#">Contacto</a></p>
+    </footer>
+
+    <div id="cookie-consent">
+        <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario.  <a href="#">Política de Privacidad</a></p>
+        <button id="accept-cookies">Aceptar</button>
+        <button id="reject-cookies">Rechazar</button>
+    </div>
+
+    <script>
+        // Mostrar la sección inicial
+        document.getElementById('inicio').classList.add('show');
+
+        // Observador para transiciones suaves
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);  // Dejar de observar después de mostrar
+                }
+            });
+        }, {
+            threshold: 0.1  // Disparar cuando el 10% de la sección es visible
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Cookie Consent
+        const cookieConsent = document.getElementById('cookie-consent');
+        const acceptCookiesButton = document.getElementById('accept-cookies');
+        const rejectCookiesButton = document.getElementById('reject-cookies');
+
+        // Función para establecer una cookie
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        // Función para obtener una cookie
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Comprobar si la cookie ya está establecida
+        if (!getCookie('cookieConsent')) {
+            cookieConsent.style.display = 'block';
+        }
+
+        acceptCookiesButton.addEventListener('click', function() {
+            setCookie('cookieConsent', 'true', 365); // Cookie válida por 1 año
+            cookieConsent.style.display = 'none';
+        });
+
+        rejectCookiesButton.addEventListener('click', function() {
+            setCookie('cookieConsent', 'false', 1); // Cookie válida por 1 día (o el tiempo que desees)
+            cookieConsent.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
