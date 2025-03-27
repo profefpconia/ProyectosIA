@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Digital | [Tu Nombre]</title>
+    <meta name="description" content="Portafolio profesional de diseño y desarrollo web">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Portafolio Digital">
+    <meta property="og:image" content="banner.jpg">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #8A2BE2;
+            --secondary: #00CED1;
+            --dark: #111111;
+            --gray: #2D2D2D;
+            --light: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        nav {
+            padding: 1rem;
+            background: var(--gray);
+            position: sticky;
+            top: 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .nav-link:hover {
+            transform: scale(1.1);
+        }
+
+        /* Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .project-card {
+            background: var(--gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            background: var(--gray);
+            padding: 1rem;
+            width: 100%;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                text-align: center;
+                display: none;
+            }
+
+            .mobile-menu-active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+                cursor: pointer;
+            }
+        }
+
+        /* Efectos */
+        button, .btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>[Tu Nombre]</h1>
+        <p>Diseñador & Desarrollador Web</p>
+    </header>
+
+    <nav>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-menu">
+            <li><a href="#inicio" class="nav-link">Inicio</a></li>
+            <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+            <li><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+            <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="proyectos" class="projects-grid">
+        <!-- Proyectos dinámicos -->
+    </section>
+
+    <section id="sobre-mi" class="about-section">
+        <!-- Contenido sobre mí -->
+    </section>
+
+    <section id="contacto">
+        <form id="contact-form">
+            <input type="text" placeholder="Nombre" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Mensaje" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" aria-label="GitHub"><img src="github-icon.svg" alt="GitHub"></a>
+            <a href="#" aria-label="LinkedIn"><img src="linkedin-icon.svg" alt="LinkedIn"></a>
+        </div>
+    </footer>
+
+    <div class="cookie-banner">
+        <p>Usamos cookies para mejorar tu experiencia. <a href="politica-privacidad.html">Más info</a></p>
+        <div>
+            <button id="accept-cookies">Aceptar</button>
+            <button id="reject-cookies">Rechazar</button>
+        </div>
+    </div>
+
+    <script>
+        // Menú móvil
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('mobile-menu-active');
+        });
+
+        // Cookies
+        const cookieBanner = document.querySelector('.cookie-banner');
+        if (!localStorage.getItem('cookies-accepted')) {
+            cookieBanner.style.display = 'flex';
+        }
+
+        document.getElementById('accept-cookies').addEventListener('click', () => {
+            localStorage.setItem('cookies-accepted', 'true');
+            cookieBanner.style.display = 'none';
+        });
+
+        document.getElementById('reject-cookies').addEventListener('click', () => {
+            localStorage.setItem('cookies-accepted', 'false');
+            cookieBanner.style.display = 'none';
+        });
+
+        // Scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Carga proyectos
+        const projects = [
+            {
+                title: 'Proyecto 1',
+                image: 'foto1.jpg',
+                description: 'Descripción breve del proyecto',
+                link: '#'
+            },
+            // Añadir más proyectos
+        ];
+
+        const projectsGrid = document.querySelector('.projects-grid');
+        projects.forEach(project => {
+            projectsGrid.innerHTML += `
+                <article class="project-card">
+                    <img src="${project.image}" alt="${project.title}" class="project-image">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <a href="${project.link}" class="btn">Ver más</a>
+                </article>
+            `;
+        });
+    </script>
+</body>
+</html>
