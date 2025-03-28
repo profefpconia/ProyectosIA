@@ -112,7 +112,7 @@
   <script>
     // Función para cargar el RSS dinámicamente
     async function loadRSS() {
-      const rssUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml');
+      const rssUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://news.google.com/rss?hl=ca-ES&gl=ES&ceid=ES:ca');
       const newsListContainer = document.getElementById('newsList');
 
       try {
@@ -124,10 +124,17 @@
 
         items.forEach(item => {
           const title = item.querySelector('title').textContent;
-          const description = item.querySelector('description').textContent;
           const link = item.querySelector('link').textContent;
-          const imageUrlMatch = description.match(/<img[^>]+src="([^">]+)/);
-          const imageUrl = imageUrlMatch ? imageUrlMatch[1] : 'https://via.placeholder.com/80'; // Imagen por defecto
+          const descriptionHTML = item.querySelector('description').textContent;
+
+          // Extraer el primer elemento de la lista en la descripción
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = descriptionHTML;
+          const firstListItem = tempDiv.querySelector('li');
+          const description = firstListItem ? firstListItem.textContent.trim() : 'Descripción no disponible';
+
+          // Imagen por defecto
+          const imageUrl = 'https://via.placeholder.com/80'; // No hay imágenes en el RSS
 
           // Crear elemento HTML para cada noticia
           const newsItem = document.createElement('a');
@@ -138,7 +145,7 @@
             <img src="${imageUrl}" alt="${title}">
             <div class="news-content">
               <h3 class="news-title">${title}</h3>
-              <p class="news-description">${description.split('<a')[0]}</p>
+              <p class="news-description">${description}</p>
             </div>
           `;
           newsListContainer.appendChild(newsItem);
