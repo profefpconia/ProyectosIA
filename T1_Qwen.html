@@ -1,134 +1,228 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias RSS</title>
-    <style>
-        /* Estilos generales */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portafolio personal moderno y accesible. Descubre mis proyectos, habilidades y contacta conmigo.">
+  <meta property="og:title" content="Portafolio Personal">
+  <meta property="og:description" content="Un portafolio digital moderno y accesible.">
+  <meta property="og:image" content="banner.jpg">
+  <meta property="og:url" content="https://tupagina.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Portafolio Personal</title>
+  <style>
+    /* Paleta de colores */
+    :root {
+      --color-primary: #ffffff; /* Blanco */
+      --color-secondary: #f4f4f4; /* Gris claro */
+      --color-accent: #007BFF; /* Azul */
+      --color-text: #333333; /* Negro */
+      --color-highlight: #FFC107; /* Amarillo */
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+    body {
+      font-family: 'Merriweather', serif;
+      background-color: var(--color-primary);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
 
-        .listview {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    header {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
 
-        .listview li {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            transition: background-color 0.3s;
-        }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
 
-        .listview li:hover {
-            background-color: #f0f0f0;
-            cursor: pointer;
-        }
+    nav a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
 
-        .listview li img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            margin-right: 15px;
-            border-radius: 5px;
-        }
+    nav a:hover {
+      color: var(--color-highlight);
+    }
 
-        .listview li .content {
-            flex-grow: 1;
-        }
+    .banner {
+      background: url('banner.jpg') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
 
-        .listview li .title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
+    .banner h1 {
+      font-size: 2.5rem;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        .listview li .description {
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
+    section {
+      padding: 2rem 1rem;
+    }
+
+    .rss-feed {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .rss-item {
+      background: var(--color-secondary);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .rss-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .rss-item img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .rss-item h3 {
+      margin: 1rem 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .rss-item p {
+      margin-bottom: 1rem;
+    }
+
+    .rss-item a {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .rss-item a:hover {
+      background: var(--color-highlight);
+    }
+
+    footer {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    footer a {
+      color: var(--color-primary);
+      margin: 0 0.5rem;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .banner h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Últimas Noticias</h1>
-        <ul id="news-list" class="listview"></ul>
-    </div>
+  <header>
+    <h1>Mi Portafolio</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#sobremi">Sobre mí</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
 
-    <!-- Incluimos la biblioteca rss-parser -->
-    <script src="https://cdn.jsdelivr.net/npm/rss-parser/dist/rss-parser.min.js"></script>
-    <script>
-        // Creamos una instancia de RSSParser
-        const parser = new RSSParser();
+  <div class="banner">
+    <h1>Bienvenido a mi mundo creativo</h1>
+  </div>
 
-        // URL del RSS
-        const rssUrl = 'https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml';
+  <section id="rss">
+    <h2>Últimas Noticias</h2>
+    <div class="rss-feed" id="rssFeed"></div>
+  </section>
 
-        // Función para cargar y mostrar las noticias
-        async function loadNews() {
-            try {
-                const feed = await parser.parseURL(rssUrl);
-                const newsList = document.getElementById('news-list');
+  <footer>
+    <p>Conéctate conmigo:</p>
+    <a href="#">Facebook</a>
+    <a href="#">Twitter</a>
+    <a href="#">Instagram</a>
+    <a href="#">RSS</a>
+    <a href="mailto:correo@ejemplo.com">Email</a>
+  </footer>
 
-                // Limpiamos la lista antes de agregar nuevas noticias
-                newsList.innerHTML = '';
+  <script>
+    // Función para cargar el RSS dinámicamente
+    async function loadRSS() {
+      const rssUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml');
+      const rssFeedContainer = document.getElementById('rssFeed');
 
-                // Iteramos sobre cada ítem del RSS
-                feed.items.forEach(item => {
-                    // Creamos un elemento de lista
-                    const li = document.createElement('li');
-                    li.addEventListener('click', () => window.open(item.link, '_blank'));
+      try {
+        const response = await fetch(rssUrl);
+        const data = await response.json();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data.contents, 'application/xml');
+        const items = xml.querySelectorAll('item');
 
-                    // Extraemos la imagen (si existe) del contenido
-                    let imageUrl = '';
-                    if (item.content && item.content.includes('<img')) {
-                        const imgMatch = item.content.match(/<img[^>]+src="([^">]+)/);
-                        if (imgMatch) {
-                            imageUrl = imgMatch[1];
-                        }
-                    }
+        items.forEach(item => {
+          const title = item.querySelector('title').textContent;
+          const description = item.querySelector('description').textContent;
+          const link = item.querySelector('link').textContent;
+          const imageUrlMatch = description.match(/<img[^>]+src="([^">]+)/);
+          const imageUrl = imageUrlMatch ? imageUrlMatch[1] : 'https://via.placeholder.com/150'; // Imagen por defecto si no hay URL
 
-                    // Construimos el HTML del ítem
-                    li.innerHTML = `
-                        <img src="${imageUrl || 'https://via.placeholder.com/80'}" alt="Imagen de la noticia">
-                        <div class="content">
-                            <div class="title">${item.title}</div>
-                            <div class="description">${item.contentSnippet || 'Sin descripción'}</div>
-                        </div>
-                    `;
+          // Crear elemento HTML para cada noticia
+          const rssItem = document.createElement('div');
+          rssItem.classList.add('rss-item');
+          rssItem.innerHTML = `
+            <img src="${imageUrl}" alt="${title}">
+            <h3>${title}</h3>
+            <p>${description.split('<a')[0]}</p>
+            <a href="${link}" target="_blank">Leer más</a>
+          `;
+          rssFeedContainer.appendChild(rssItem);
+        });
+      } catch (error) {
+        console.error('Error al cargar el RSS:', error);
+        rssFeedContainer.innerHTML = '<p>No se pudieron cargar las noticias.</p>';
+      }
+    }
 
-                    // Agregamos el ítem a la lista
-                    newsList.appendChild(li);
-                });
-            } catch (error) {
-                console.error('Error al cargar las noticias:', error);
-                alert('No se pudieron cargar las noticias. Por favor, intenta más tarde.');
-            }
-        }
-
-        // Cargamos las noticias cuando se carga la página
-        document.addEventListener('DOMContentLoaded', loadNews);
-    </script>
+    // Cargar el RSS al cargar la página
+    window.onload = loadRSS;
+  </script>
 </body>
 </html>
