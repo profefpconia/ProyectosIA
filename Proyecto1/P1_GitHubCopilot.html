@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio personal de proyectos">
+    <meta property="og:title" content="Portfolio de Proyectos">
+    <meta property="og:description" content="Portfolio personal de proyectos">
+    <meta property="og:image" content="banner.jpg">
+    <title>Portfolio de Proyectos</title>
+    <style>
+        :root {
+            --color1: #000000;
+            --color2: #ffffff;
+            --color3: #ff6347;
+            --color4: #4682b4;
+            --color5: #32cd32;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: var(--color1);
+            background-color: var(--color2);
+        }
+        header {
+            width: 100%;
+            height: auto;
+            background: url('banner.jpg') no-repeat center center/cover;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--color1);
+            padding: 1em;
+        }
+        nav a {
+            color: var(--color2);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            padding: 20px;
+        }
+        .project-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .project-card {
+            background-color: var(--color4);
+            color: var(--color2);
+            width: 30%;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .project-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px 8px 0 0;
+        }
+        .project-card h3 {
+            margin: 15px 0;
+        }
+        .project-card p {
+            font-size: 14px;
+        }
+        .project-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: var(--color3);
+            color: var(--color2);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .project-card a:hover {
+            background-color: var(--color5);
+        }
+        footer {
+            background-color: var(--color1);
+            color: var(--color2);
+            text-align: center;
+            padding: 1em 0;
+        }
+        footer a {
+            color: var (--color2);
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        #cookieConsent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--color2);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #cookieConsent button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            background-color: var(--color3);
+            color: var(--color2);
+            cursor: pointer;
+        }
+        #cookieConsent button:hover {
+            background-color: var(--color5);
+        }
+        @media (max-width: 768px) {
+            .project-card {
+                width: 45%;
+            }
+        }
+        @media (max-width: 480px) {
+            .project-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="#">Proyectos</a>
+            <a href="#">Sobre mí</a>
+            <a href="#">Contacto</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="project-row">
+            <div class="project-card">
+                <img src="foto1.jpg" alt="Proyecto 1">
+                <h3>Proyecto 1</h3>
+                <p>Breve descripción del proyecto 1.</p>
+                <a href="#">Ver más</a>
+            </div>
+            <div class="project-card">
+                <img src="foto1.jpg" alt="Proyecto 2">
+                <h3>Proyecto 2</h3>
+                <p>Breve descripción del proyecto 2.</p>
+                <a href="#">Ver más</a>
+            </div>
+            <div class="project-card">
+                <img src="foto1.jpg" alt="Proyecto 3">
+                <h3>Proyecto 3</h3>
+                <p>Breve descripción del proyecto 3.</p>
+                <a href="#">Ver más</a>
+            </div>
+        </div>
+        <!-- Puedes duplicar el bloque .project-row para más filas de proyectos -->
+    </div>
+
+    <footer>
+        <a href="#">RSS</a>
+        <a href="#">Contacto</a>
+        <a href="#">Email</a>
+        <a href="#">Redes Sociales</a>
+    </footer>
+
+    <div id="cookieConsent">
+        <span>Esta web usa cookies para mejorar la experiencia. <a href="#" style="color: var(--color3);">Política de privacidad</a></span>
+        <div>
+            <button onclick="acceptCookies()">Aceptar</button>
+            <button onclick="rejectCookies()">Rechazar</button>
+        </div>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            document.getElementById('cookieConsent').style.display = 'none';
+            // Lógica para aceptar cookies
+        }
+
+        function rejectCookies() {
+            document.getElementById('cookieConsent').style.display = 'none';
+            // Lógica para rechazar cookies
+        }
+    </script>
+</body>
+</html>
