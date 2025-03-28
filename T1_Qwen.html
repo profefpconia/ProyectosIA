@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias RSS</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .listview {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .listview li {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        .listview li:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .listview li img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .listview li .content {
+            flex-grow: 1;
+        }
+
+        .listview li .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .listview li .description {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Últimas Noticias</h1>
+        <ul id="news-list" class="listview"></ul>
+    </div>
+
+    <!-- Incluimos la biblioteca rss-parser -->
+    <script src="https://cdn.jsdelivr.net/npm/rss-parser/dist/rss-parser.min.js"></script>
+    <script>
+        // Creamos una instancia de RSSParser
+        const parser = new RSSParser();
+
+        // URL del RSS
+        const rssUrl = 'https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml';
+
+        // Función para cargar y mostrar las noticias
+        async function loadNews() {
+            try {
+                const feed = await parser.parseURL(rssUrl);
+                const newsList = document.getElementById('news-list');
+
+                // Limpiamos la lista antes de agregar nuevas noticias
+                newsList.innerHTML = '';
+
+                // Iteramos sobre cada ítem del RSS
+                feed.items.forEach(item => {
+                    // Creamos un elemento de lista
+                    const li = document.createElement('li');
+                    li.addEventListener('click', () => window.open(item.link, '_blank'));
+
+                    // Extraemos la imagen (si existe) del contenido
+                    let imageUrl = '';
+                    if (item.content && item.content.includes('<img')) {
+                        const imgMatch = item.content.match(/<img[^>]+src="([^">]+)/);
+                        if (imgMatch) {
+                            imageUrl = imgMatch[1];
+                        }
+                    }
+
+                    // Construimos el HTML del ítem
+                    li.innerHTML = `
+                        <img src="${imageUrl || 'https://via.placeholder.com/80'}" alt="Imagen de la noticia">
+                        <div class="content">
+                            <div class="title">${item.title}</div>
+                            <div class="description">${item.contentSnippet || 'Sin descripción'}</div>
+                        </div>
+                    `;
+
+                    // Agregamos el ítem a la lista
+                    newsList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error al cargar las noticias:', error);
+                alert('No se pudieron cargar las noticias. Por favor, intenta más tarde.');
+            }
+        }
+
+        // Cargamos las noticias cuando se carga la página
+        document.addEventListener('DOMContentLoaded', loadNews);
+    </script>
+</body>
+</html>
