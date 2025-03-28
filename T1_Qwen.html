@@ -112,7 +112,7 @@
   <script>
     // Función para cargar el RSS dinámicamente
     async function loadRSS() {
-      const rssUrl = 'https://thingproxy.freeboard.io/fetch/' + encodeURIComponent('https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada');
+      const rssUrl = 'https://thingproxy.freeboard.io/fetch/' + encodeURIComponent('https://feeds.megaphone.fm/NATIONALAERONAUTICSANDSPACEADMINISTRATION5412631684');
       const newsListContainer = document.getElementById('newsList');
 
       try {
@@ -136,7 +136,7 @@
           const title = item.querySelector('title')?.textContent || 'Título no disponible';
           const link = item.querySelector('link')?.textContent || '#';
           const description = item.querySelector('description')?.textContent || 'Descripción no disponible';
-          const mediaThumbnail = item.querySelector('media\\:thumbnail')?.getAttribute('url') || 'https://via.placeholder.com/80'; // Imagen por defecto
+          const mediaThumbnail = item.querySelector('itunes\\:image')?.getAttribute('href') || 'https://via.placeholder.com/80'; // Imagen por defecto
 
           // Crear elemento HTML para cada noticia
           const newsItem = document.createElement('a');
