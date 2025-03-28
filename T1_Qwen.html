@@ -3,13 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portafolio personal moderno y accesible. Descubre mis proyectos, habilidades y contacta conmigo.">
-  <meta property="og:title" content="Portafolio Personal">
-  <meta property="og:description" content="Un portafolio digital moderno y accesible.">
-  <meta property="og:image" content="banner.jpg">
-  <meta property="og:url" content="https://tupagina.com">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Portafolio Personal</title>
+  <meta name="description" content="Visualizador de noticias RSS en formato listview.">
+  <title>Noticias RSS</title>
   <style>
     /* Paleta de colores */
     :root {
@@ -37,187 +32,120 @@
     header {
       background: var(--color-accent);
       color: var(--color-primary);
-      padding: 2rem 1rem;
+      padding: 1rem;
       text-align: center;
     }
 
-    nav {
+    .news-list {
       display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
     }
 
-    nav a {
-      color: var(--color-primary);
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--color-highlight);
-    }
-
-    .banner {
-      background: url('banner.jpg') no-repeat center center/cover;
-      height: 300px;
+    .news-item {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-primary);
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .banner h1 {
-      font-size: 2.5rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    section {
-      padding: 2rem 1rem;
-    }
-
-    .rss-feed {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .rss-item {
+      align-items: flex-start;
+      gap: 1rem;
       background: var(--color-secondary);
       padding: 1rem;
       border-radius: 8px;
-      text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
-    .rss-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    .news-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .rss-item img {
-      max-width: 100%;
-      height: auto;
+    .news-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
       border-radius: 8px;
-      margin-bottom: 1rem;
     }
 
-    .rss-item h3 {
-      margin: 1rem 0;
+    .news-content {
+      flex: 1;
+    }
+
+    .news-title {
       font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .rss-item p {
-      margin-bottom: 1rem;
-    }
-
-    .rss-item a {
-      background: var(--color-accent);
-      color: var(--color-primary);
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.3s ease;
-    }
-
-    .rss-item a:hover {
-      background: var(--color-highlight);
-    }
-
-    footer {
-      background: var(--color-accent);
-      color: var(--color-primary);
-      text-align: center;
-      padding: 1rem;
-    }
-
-    footer a {
-      color: var(--color-primary);
-      margin: 0 0.5rem;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+    .news-description {
+      font-size: 0.9rem;
+      color: #666;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
 
     @media (max-width: 768px) {
-      .banner h1 {
-        font-size: 2rem;
+      .news-item {
+        flex-direction: column;
+        align-items: center;
       }
 
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
+      .news-item img {
+        width: 100%;
+        height: auto;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Mi Portafolio</h1>
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#sobremi">Sobre mí</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+    <h1>Noticias RSS</h1>
   </header>
 
-  <div class="banner">
-    <h1>Bienvenido a mi mundo creativo</h1>
-  </div>
-
-  <section id="rss">
-    <h2>Últimas Noticias</h2>
-    <div class="rss-feed" id="rssFeed"></div>
-  </section>
-
-  <footer>
-    <p>Conéctate conmigo:</p>
-    <a href="#">Facebook</a>
-    <a href="#">Twitter</a>
-    <a href="#">Instagram</a>
-    <a href="#">RSS</a>
-    <a href="mailto:correo@ejemplo.com">Email</a>
-  </footer>
+  <section class="news-list" id="newsList"></section>
 
   <script>
     // Función para cargar el RSS dinámicamente
     async function loadRSS() {
       const rssUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml');
-      const rssFeedContainer = document.getElementById('rssFeed');
+      const newsListContainer = document.getElementById('newsList');
 
       try {
         const response = await fetch(rssUrl);
         const data = await response.json();
         const parser = new DOMParser();
         const xml = parser.parseFromString(data.contents, 'application/xml');
-        const items = xml.querySelectorAll('item');
+        const items = Array.from(xml.querySelectorAll('item')).slice(0, 20); // Limitar a 20 noticias
 
         items.forEach(item => {
           const title = item.querySelector('title').textContent;
           const description = item.querySelector('description').textContent;
           const link = item.querySelector('link').textContent;
           const imageUrlMatch = description.match(/<img[^>]+src="([^">]+)/);
-          const imageUrl = imageUrlMatch ? imageUrlMatch[1] : 'https://via.placeholder.com/150'; // Imagen por defecto si no hay URL
+          const imageUrl = imageUrlMatch ? imageUrlMatch[1] : 'https://via.placeholder.com/80'; // Imagen por defecto
 
           // Crear elemento HTML para cada noticia
-          const rssItem = document.createElement('div');
-          rssItem.classList.add('rss-item');
-          rssItem.innerHTML = `
+          const newsItem = document.createElement('a');
+          newsItem.classList.add('news-item');
+          newsItem.href = link;
+          newsItem.target = '_blank';
+          newsItem.innerHTML = `
             <img src="${imageUrl}" alt="${title}">
-            <h3>${title}</h3>
-            <p>${description.split('<a')[0]}</p>
-            <a href="${link}" target="_blank">Leer más</a>
+            <div class="news-content">
+              <h3 class="news-title">${title}</h3>
+              <p class="news-description">${description.split('<a')[0]}</p>
+            </div>
           `;
-          rssFeedContainer.appendChild(rssItem);
+          newsListContainer.appendChild(newsItem);
         });
       } catch (error) {
         console.error('Error al cargar el RSS:', error);
-        rssFeedContainer.innerHTML = '<p>No se pudieron cargar las noticias.</p>';
+        newsListContainer.innerHTML = '<p>No se pudieron cargar las noticias.</p>';
       }
     }
 
