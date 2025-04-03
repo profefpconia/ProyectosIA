@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot con DeepSeek</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+            height: 400px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #send-btn {
+            margin-left: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #f1f1f1;
+            color: black;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box">
+            <!-- Aquí se mostrarán los mensajes -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Escribe tu mensaje..." />
+            <button id="send-btn">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Tu API Key de OpenRoute
+        const OPENROUTE_API_KEY = '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';
+
+        // URL de la API de OpenRoute
+        const API_URL = 'https://api.openroute.com/v2/ai/deepseek';
+
+        // Elementos del DOM
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-btn');
+
+        // Función para agregar un mensaje al chat
+        function addMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = message;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight; // Desplazar hacia abajo
+        }
+
+        // Función para enviar una consulta al modelo
+        async function sendMessage() {
+            const userMessage = userInput.value.trim();
+            if (!userMessage) return;
+
+            // Mostrar el mensaje del usuario
+            addMessage(userMessage, 'user');
+            userInput.value = '';
+
+            try {
+                // Enviar la consulta a la API
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${OPENROUTE_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: userMessage,
+                        max_tokens: 100 // Ajusta según tus necesidades
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al comunicarse con la API');
+                }
+
+                const data = await response.json();
+                const botResponse = data.result || 'No se pudo obtener una respuesta.';
+
+                // Mostrar la respuesta del modelo
+                addMessage(botResponse, 'bot');
+            } catch (error) {
+                console.error(error);
+                addMessage('Ocurrió un error al procesar tu solicitud.', 'bot');
+            }
+        }
+
+        // Evento para enviar mensajes al presionar el botón
+        sendButton.addEventListener('click', sendMessage);
+
+        // Evento para enviar mensajes al presionar Enter
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
